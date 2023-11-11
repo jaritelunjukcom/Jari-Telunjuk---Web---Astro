@@ -1,0 +1,144 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="Blog List">
+  <main class="relative overflow-hidden pb-20 pt-32">
+    <div class="container mx-auto max-w-screen-xl px-12">
+      <header
+        class="mx-auto mb-16 flex max-w-2xl flex-col items-center gap-6 text-center"
+      >
+        <h1 class="font-arvo text-[42px] leading-[32px]">Blog Post</h1>
+        <p class="text-base leading-6">
+          Enter a book you like and the site will analyse our huge database of
+          real readers' favorite books to provide book recommendations and
+          suggestions for what to read next.
+        </p>
+      </header>
+
+      <div class="grid grid-cols-12 gap-10 pb-14 pt-10">
+        <section class="col-span-8">
+          <h3 class="mb-10 font-arvo text-[34px] leading-none">All Blogs</h3>
+
+          <div class="space-y-10">
+            {
+              [1, 2, 3, 4, 5, 6].map((item) => {
+                return (
+                  <figure class="group relative flex w-full items-start gap-8">
+                    <a class="absolute z-10 h-full w-full" href="/detail" />
+
+                    <img
+                      class="aspect-video h-48 w-auto rounded-md"
+                      src="/blog-1.png"
+                      alt="Blog 1 Photo"
+                    />
+
+                    <div class="space-y-2">
+                      <h5 class="text-2xl font-bold leading-[28px] group-hover:underline">
+                        Sell Yourself to Success In Career and Life
+                      </h5>
+
+                      <p class="line-clamp-2 pb-1.5 text-[#515151]">
+                        In her second novel, The Stationery Shop, Marjan Kamali
+                        weaves a heartbreaking tale. No matter your occupation,
+                        you’re going...
+                      </p>
+
+                      <p class="relative z-20 space-x-2">
+                        <span>Category</span>
+                        <a
+                          href="/category"
+                          class="text-[#128C55] hover:underline"
+                        >
+                          Self Improvement
+                        </a>
+                      </p>
+
+                      <p>Reza Adil - 25 Januari 2021</p>
+                    </div>
+                  </figure>
+                );
+              })
+            }
+          </div>
+        </section>
+
+        <section class="col-span-4">
+          <h3 class="mb-10 font-arvo text-[34px] leading-none">Popular</h3>
+
+          <div class="space-y-6">
+            {
+              [1, 2, 3, 4, 5].map((item) => {
+                return (
+                  <figure class="group relative flex w-full items-start gap-4">
+                    <a class="absolute z-10 h-full w-full" href="/" />
+
+                    <h3 class="font-arvo text-2xl font-bold italic leading-[26px] opacity-20">
+                      0{item}
+                    </h3>
+
+                    <div class="flex-1 space-y-2">
+                      <h5 class="text-xl font-semibold leading-5 group-hover:underline">
+                        Sell Yourself to Success In Career and Life
+                      </h5>
+
+                      <p class="line-clamp-2 pb-1.5 text-[#515151]">
+                        In her second novel, The Stationery Shop, Marjan Kamali
+                        weaves a heartbreaking tale. No matter your occupation,
+                        you’re going...
+                      </p>
+
+                      <p class="relative z-20 space-x-2">
+                        <span>Category</span>
+                        <a
+                          href="/category"
+                          class="text-[#128C55] hover:underline"
+                        >
+                          Self Improvement
+                        </a>
+                      </p>
+
+                      <p>Reza Adil - 25 Januari 2021</p>
+                    </div>
+                  </figure>
+                );
+              })
+            }
+          </div>
+        </section>
+      </div>
+
+      <section class="my-20 flex w-full flex-col items-center gap-10">
+        <h3 class="text-center font-arvo text-[34px] leading-none">
+          Kategori Blog
+        </h3>
+
+        <div class="grid w-full grid-cols-3 gap-5">
+          {
+            [1, 2, 3, 4, 5, 6].map((item) => {
+              return (
+                <figure class="group relative h-96 w-full overflow-hidden rounded-md border border-[#DCDCDC]">
+                  <a
+                    href="/"
+                    class="absolute z-20 h-full w-full object-cover"
+                  />
+                  <div class="absolute inset-0 z-10 flex h-full w-full flex-col items-start justify-end gap-2 bg-gradient-to-t from-white via-stone-50/75 to-stone-200/25 object-cover p-5">
+                    <h5 class="text-xl font-semibold leading-[26px] group-hover:underline">
+                      Self Improvement
+                    </h5>
+                    <p class="text-base leading-5 text-[#2e2e2e]">12 Blog</p>
+                  </div>
+                  <img
+                    class="h-full w-full object-cover"
+                    src={`/category-${item}.png`}
+                    alt={`Category ${item}`}
+                  />
+                </figure>
+              );
+            })
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,68 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<script>
+  const valueList = document.querySelector("#valueList");
+  let valueListText = `<span> You have selected : </span>`;
+
+  let listArray = [];
+
+  const checkboxes = document.querySelectorAll(".checkbox");
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", () => {
+      if (checkbox.checked) {
+        listArray.push(checkbox.value);
+        valueList.innerHTML = valueListText + listArray.length;
+      } else {
+        listArray = listArray.filter((e) => e !== checkbox.value);
+        valueList.innerHTML = valueListText + listArray.length;
+      }
+    });
+  });
+</script>
+
+<Layout title="Sandbox">
+  <main class="container mx-auto min-h-screen max-w-screen-xl px-12 pt-40">
+    <div
+      class="grid w-full grid-cols-7 place-items-center justify-center gap-6"
+    >
+      {
+        [1, 2, 3, 4, 5, 6, 7].map((item) => {
+          return (
+            <div>
+              <input
+                type="checkbox"
+                id={`checkbox item-${item}`}
+                value={`item-${item}`}
+                class="checkbox peer hidden"
+              />
+
+              <label
+                for={`checkbox item-${item}`}
+                class="w-full cursor-pointer font-normal peer-checked:font-semibold [&>img]:shadow-sm peer-checked:[&>img]:shadow-2xl"
+              >
+                <figure class="relative space-y-3">
+                  <img
+                    class="h-auto w-full"
+                    src="/choose-book-1.png"
+                    alt="Choose Book 1"
+                  />
+
+                  <h5 class="pointer-events-none text-sm leading-5">
+                    The Subtle Art of Not Giving A <br /> <br /> item-{item}
+                  </h5>
+                </figure>
+              </label>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <div class="print-values">
+      <p id="valueList"></p>
+    </div>
+  </main>
+</Layout>

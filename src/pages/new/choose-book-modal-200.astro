@@ -1,0 +1,221 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<script>
+  //-----------------------------------------------------------------------------//
+  const modal_chooseBook = document.querySelector("#modal_choose-book");
+  const modal_chooseBook_overlay = document.querySelector(
+    "#modal_choose-book #overlay"
+  );
+  const open_btn = document.querySelector("#open-btn");
+
+  open_btn.addEventListener("click", () => {
+    if (modal_chooseBook.classList.contains("hidden")) {
+      modal_chooseBook.classList.add("flex");
+      modal_chooseBook.classList.remove("hidden");
+    }
+  });
+
+  modal_chooseBook_overlay.addEventListener("click", () => {
+    if (modal_chooseBook.classList.contains("flex")) {
+      modal_chooseBook.classList.remove("flex");
+      modal_chooseBook.classList.add("hidden");
+    }
+  });
+  //-----------------------------------------------------------------------------//
+  const close_modal = document.querySelector("#close-modal");
+
+  close_modal.addEventListener("click", () => {
+    if (modal_chooseBook.classList.contains("flex")) {
+      modal_chooseBook.classList.remove("flex");
+      modal_chooseBook.classList.add("hidden");
+    }
+  });
+  //-----------------------------------------------------------------------------//
+  const valueList = document.querySelector("#valueList");
+  let valueListText = `<span> Buku dipilih</span>`;
+
+  let listArray = [];
+
+  const checkboxes = document.querySelectorAll(".checkbox");
+  const next_btn: HTMLElement = document.querySelector("#next-btn");
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", () => {
+      if (checkbox.checked) {
+        listArray.push(checkbox.value);
+        valueList.innerHTML = listArray.length + valueListText;
+      } else {
+        listArray = listArray.filter((e) => e !== checkbox.value);
+        valueList.innerHTML = listArray.length + valueListText;
+      }
+
+      if (listArray.length > 3) {
+        next_btn.classList.remove("bg-[#72D1A6]");
+        next_btn.classList.add("bg-[#128C55]");
+      } else {
+        next_btn.classList.remove("bg-[#128C55]");
+        next_btn.classList.add("bg-[#72D1A6]");
+      }
+    });
+  });
+  //-----------------------------------------------------------------------------//
+</script>
+
+<Layout title="Choose Book Modal 200">
+  <div class="relative min-h-screen">
+    <!-- Modal Pilih Buku -->
+    <div class="relative mx-auto mt-32 flex flex-row justify-center">
+      <button
+        id="open-btn"
+        class="rounded-full bg-[#128C55] px-5 py-2 font-bold leading-5 text-white hover:bg-[#128C55]/90"
+      >
+        Open modal
+      </button>
+    </div>
+
+    <div
+      id="modal_choose-book"
+      class="fixed inset-0 z-[999999999] hidden h-full w-full items-center justify-center"
+    >
+      <!-- overlay -->
+      <div id="overlay" class="fixed inset-0 z-10 h-full w-full bg-black/50">
+      </div>
+
+      <!-- content -->
+      <div
+        class="relative z-20 h-screen w-full max-w-4xl overflow-hidden bg-white p-0 lg:h-full lg:max-h-[576px] lg:rounded-2xl lg:p-11"
+      >
+        <!-- if 404 use mb-6 otherwise mb-14 -->
+        <header class="mb-2 flex flex-col items-center lg:mb-6">
+          <nav
+            class="mb-2 flex w-full items-center justify-between border-b border-[#EBEBEB] p-4 lg:justify-center lg:border-b-0 lg:p-0"
+          >
+            <h1
+              class="w-auto text-left font-arvo text-xl leading-none text-[#2e2e2e] lg:w-full lg:text-center lg:text-[34px]"
+            >
+              Pilih Buku
+            </h1>
+
+            <button id="close-modal" class="block lg:hidden">
+              <svg
+                class="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M19.6646 18.0489C20.1115 18.4958 20.1115 19.2181 19.6646 19.6649C19.4418 19.8878 19.1492 19.9998 18.8567 19.9998C18.5641 19.9998 18.2715 19.8878 18.0487 19.6649L11.9998 13.6159L5.95083 19.6649C5.72798 19.8878 5.43542 19.9998 5.14286 19.9998C4.8503 19.9998 4.55774 19.8878 4.33489 19.6649C3.88805 19.2181 3.88805 18.4958 4.33489 18.0489L10.3838 11.9999L4.33489 5.95086C3.88805 5.50401 3.88805 4.78174 4.33489 4.33489C4.78173 3.88804 5.50399 3.88804 5.95083 4.33489L11.9998 10.3839L18.0487 4.33489C18.4955 3.88804 19.2178 3.88804 19.6646 4.33489C20.1115 4.78174 20.1115 5.50401 19.6646 5.95086L13.6157 11.9999L19.6646 18.0489Z"
+                  fill="#2E2E2E"></path>
+              </svg>
+            </button>
+          </nav>
+
+          <p class="mb-5 text-base font-normal leading-6 text-[#636363]">
+            Kami menampilkan sesuai kategori yang kamu pilih.
+          </p>
+
+          <!-- search -->
+          <div
+            class="flex w-full items-center justify-center gap-4 px-4 lg:px-0"
+          >
+            <div class="relative w-full lg:max-w-sm">
+              <svg
+                class="absolute left-4 top-1/2 z-10 h-6 w-6 -translate-y-1/2 lg:left-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5 10C5 6.691 7.691 4 11 4C14.309 4 17 6.691 17 10C17 13.309 14.309 16 11 16C7.691 16 5 13.309 5 10ZM21.707 19.293L17.312 14.897C18.366 13.542 19 11.846 19 10C19 5.589 15.411 2 11 2C6.589 2 3 5.589 3 10C3 14.411 6.589 18 11 18C12.846 18 14.542 17.366 15.897 16.312L20.293 20.707C20.488 20.902 20.744 21 21 21C21.256 21 21.512 20.902 21.707 20.707C22.098 20.316 22.098 19.684 21.707 19.293Z"
+                  fill="#8D8D8D"></path>
+              </svg>
+
+              <input
+                type="text"
+                class="w-full rounded-full border border-[#dedede] py-2 pl-12 lg:pl-16"
+                placeholder="Cari judul buku sesuai kategori..."
+              />
+            </div>
+
+            <button class="block flex-shrink-0 text-sm lg:hidden">Cari</button>
+          </div>
+        </header>
+
+        <!-- search found / initial list -->
+        <section
+          class="block h-[calc(100vh_-_288px)] overflow-y-auto p-4 lg:h-auto lg:p-0"
+        >
+          <div
+            class="grid w-full grid-cols-3 place-items-center justify-center gap-4 lg:grid-cols-7 lg:gap-6"
+          >
+            {
+              [1, 2, 3, 4, 5, 6, 7].map((item) => {
+                return (
+                  <div>
+                    <input
+                      type="checkbox"
+                      id={`checkbox item-${item}`}
+                      value={`item-${item}`}
+                      class="checkbox peer hidden"
+                    />
+
+                    <label
+                      for={`checkbox item-${item}`}
+                      class="w-full cursor-pointer font-normal peer-checked:font-semibold [&>img]:shadow-sm peer-checked:[&>img]:shadow-2xl"
+                    >
+                      <figure class="relative space-y-3">
+                        <img
+                          class="h-auto w-full"
+                          src="/choose-book-1.png"
+                          alt="Choose Book 1"
+                        />
+
+                        <h5 class="pointer-events-none text-sm leading-5">
+                          The Subtle Art of Not Giving A
+                        </h5>
+                      </figure>
+                    </label>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </section>
+
+        <div
+          class="absolute bottom-0 left-0 z-10 flex h-28 w-full flex-col items-start gap-2 border-t bg-[#FCFAF7] p-4 shadow-xl lg:flex-row lg:items-center lg:justify-between lg:border-0 lg:px-14 lg:py-8 lg:shadow-none"
+        >
+          <div class="print-values">
+            <h5
+              id="valueList"
+              class="text-base font-bold leading-5 text-[#141414]"
+            >
+              0 Buku dipilih
+            </h5>
+          </div>
+
+          <div class="flex w-full flex-row gap-2 lg:w-auto lg:gap-4">
+            <button
+              class="w-full rounded-full border border-[#222222] bg-white px-6 py-3 text-base font-bold leading-5 text-[#222222] lg:w-auto lg:py-4"
+            >
+              Sebelumnya
+            </button>
+
+            <button
+              id="next-btn"
+              class="w-full cursor-pointer rounded-full bg-[#72D1A6] px-6 py-3 text-base font-bold leading-5 text-white disabled:cursor-auto lg:w-auto lg:py-4"
+            >
+              Selanjutnya
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

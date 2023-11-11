@@ -1,0 +1,1262 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const listItem = [
+  "Art",
+  "Biography",
+  "Business",
+  "Children’s",
+  "Christian",
+  "Classics",
+  "Comics",
+  "Cookbooks",
+  "Ebooks",
+  "Fantasy",
+  "Fiction",
+  "Graphic Noverls",
+  "Historical Fiction",
+  "History",
+  "Horror",
+  "Memoir",
+  "Music",
+  "Mystery",
+  "Nonfiction",
+  "Poetry",
+  "Psychology",
+  "Romance",
+  "Science",
+  "Science Fiction",
+  "Self Help",
+  "Sports",
+  "Thriller",
+  "Travel",
+  "Young Adult",
+];
+---
+
+<script>
+  import MicroModal from "micromodal";
+
+  MicroModal.init({
+    onShow: (modal) => console.info(`${modal.id} is shown`), // [1]
+    onClose: (modal) => console.info(`${modal.id} is hidden`), // [2]
+    openTrigger: "data-custom-open", // [3]
+    closeTrigger: "data-custom-close", // [4]
+    openClass: "is-open", // [5]
+    disableScroll: true, // [6]
+    disableFocus: false, // [7]
+    awaitOpenAnimation: false, // [8]
+    awaitCloseAnimation: false, // [9]
+    debugMode: true, // [10]
+  });
+  const modal_recc = document.querySelector("#modal-choose-book-index");
+  const choose_book_section = document.querySelector("#choose-book-section");
+  const recc_book_section = document.querySelector("#recommend-book-section");
+  const book_recommendation = document.querySelector("#book-recommendation");
+  const finish_recc_btn = document.querySelector("#btn-recommend-finish");
+  const prev_choose_book_btn = document.querySelector("#btn-prev-choose-book");
+  // const close_modal = document.querySelector("#close-modal");
+  const modal_recc_overlay = document.querySelector(
+    "#modal-choose-book-index #overlay-index"
+  );
+
+  book_recommendation.addEventListener("click", () => {
+    // MicroModal.show("modal-1");
+    if (modal_recc.classList.contains("hidden")) {
+      modal_recc.classList.remove("hidden");
+      modal_recc.classList.add("flex");
+    }
+  });
+
+  finish_recc_btn.addEventListener("click", () => {
+    if (recc_book_section.classList.contains("relative")) {
+      recc_book_section.classList.add("hidden");
+      choose_book_section.classList.remove("hidden");
+    }
+  });
+
+  prev_choose_book_btn.addEventListener("click", () => {
+    if (choose_book_section.classList.contains("relative")) {
+      choose_book_section.classList.add("hidden");
+      recc_book_section.classList.remove("hidden");
+    }
+  });
+
+  modal_recc_overlay.addEventListener("click", () => {
+    if (modal_recc.classList.contains("flex")) {
+      modal_recc.classList.remove("flex");
+      modal_recc.classList.add("hidden");
+    }
+  });
+
+  const close_modal = document.querySelector("#close-modal-index");
+  const close_modal_book = document.querySelector("#close-modal-index-book");
+  close_modal.addEventListener("click", () => {
+    if (modal_recc.classList.contains("flex")) {
+      modal_recc.classList.remove("flex");
+      modal_recc.classList.add("hidden");
+    }
+  });
+  close_modal_book.addEventListener("click", () => {
+    if (modal_recc.classList.contains("flex")) {
+      modal_recc.classList.remove("flex");
+      modal_recc.classList.add("hidden");
+    }
+  });
+  // close_modal.addEventListener("click", () => {
+  //   MicroModal.close("modal-1");
+  // });
+</script>
+
+<Layout title="Discover books you’ll love!">
+  <section class="relative mt-20 overflow-hidden xl:mt-32">
+    <div
+      class="container mx-auto flex max-w-screen-xl flex-col items-center px-4 text-center xl:px-12"
+    >
+      <h1
+        class="mb-4 font-arvo text-2xl leading-7 xl:mb-6 xl:text-[42px] xl:leading-[34px]"
+      >
+        Discover books you’ll love!
+      </h1>
+      <p class="max-w-[636px] text-base leading-6">
+        Enter a book you like and the site will analyse our huge database of
+        real readers' favorite books to provide book recommendations and
+        suggestions for what to read next.
+      </p>
+    </div>
+
+    <section class="relative flex w-full scale-110 items-center gap-6">
+      <div
+        id="overlay"
+        class="absolute left-0 top-0 z-50 h-full w-full bg-gradient-to-t from-stone-300 to-stone-50/25"
+      >
+      </div>
+
+      <section class="-mb-12 flex w-full items-center gap-2 xl:-mb-24 xl:gap-6">
+        <div class="flex w-1/5 flex-col items-start gap-2 xl:gap-6">
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${1}.png`}
+              alt={`Book Photo ${1}`}
+            />
+          </div>
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${2}.png`}
+              alt={`Book Photo ${2}`}
+            />
+          </div>
+        </div>
+
+        <div
+          class="mt-16 flex w-1/5 flex-col items-start gap-2 xl:mt-32 xl:gap-6"
+        >
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${3}.png`}
+              alt={`Book Photo ${3}`}
+            />
+          </div>
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${4}.png`}
+              alt={`Book Photo ${4}`}
+            />
+          </div>
+        </div>
+
+        <div
+          class="mt-28 flex w-1/5 flex-col items-start gap-2 xl:mt-56 xl:gap-6"
+        >
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${5}.png`}
+              alt={`Book Photo ${5}`}
+            />
+          </div>
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${6}.png`}
+              alt={`Book Photo ${6}`}
+            />
+          </div>
+        </div>
+
+        <div
+          class="mt-16 flex w-1/5 flex-col items-start gap-2 xl:mt-32 xl:gap-6"
+        >
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${7}.png`}
+              alt={`Book Photo ${7}`}
+            />
+          </div>
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${8}.png`}
+              alt={`Book Photo ${8}`}
+            />
+          </div>
+        </div>
+
+        <div class="flex w-1/5 flex-col items-start gap-2 xl:gap-6">
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${9}.png`}
+              alt={`Book Photo ${9}`}
+            />
+          </div>
+          <div class="relative h-auto w-full">
+            <img
+              class="h-full w-full object-cover object-top"
+              src={`/book-photo-${10}.png`}
+              alt={`Book Photo ${10}`}
+            />
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="relative w-full bg-[#F9F8F6] py-6 xl:py-24">
+      <div class="container mx-auto max-w-screen-xl px-4 xl:px-12">
+        <h3
+          class="mb-12 text-center font-arvo text-2xl leading-7 xl:mb-20 xl:text-[34px] xl:leading-none"
+        >
+          Benefit Jari Telunjuk
+        </h3>
+
+        <section class="grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-12">
+          <figure class="space-y-2 xl:space-y-10">
+            <img src="/benefit-1.png" alt="Benefit 1" />
+            <figcaption
+              class="text-sm leading-[22px] xl:text-base xl:leading-6"
+            >
+              Rekomendasi buku berdasarkan selera/ kebutuhan
+            </figcaption>
+          </figure>
+
+          <figure class="space-y-2 xl:space-y-10">
+            <img src="/benefit-2.png" alt="Benefit 2" />
+            <figcaption
+              class="text-sm leading-[22px] xl:text-base xl:leading-6"
+            >
+              Tracking buku apa saja yang Anda baca, sudah dibaca ataupun akan
+              dibaca.
+            </figcaption>
+          </figure>
+
+          <figure class="space-y-2 xl:space-y-10">
+            <img src="/benefit-3.png" alt="Benefit 3" />
+            <figcaption
+              class="text-sm leading-[22px] xl:text-base xl:leading-6"
+            >
+              Berbagi daftar buku favorit atau buku yang akan Anda baca dengan
+              teman ataupun komunitas
+            </figcaption>
+          </figure>
+
+          <figure class="space-y-2 xl:space-y-10">
+            <img src="/benefit-4.png" alt="Benefit 4" />
+            <figcaption
+              class="text-sm leading-[22px] xl:text-base xl:leading-6"
+            >
+              Daftar buku ter-update
+            </figcaption>
+          </figure>
+        </section>
+      </div>
+    </section>
+
+    <section class="relative w-full bg-white py-6 xl:py-24">
+      <div
+        class="container mx-auto max-w-screen-xl space-y-6 px-4 xl:space-y-20 xl:px-12"
+      >
+        <header class="space-y-4 text-center xl:mb-7 xl:space-y-6">
+          <h3
+            class="font-arvo text-2xl leading-7 xl:text-[34px] xl:leading-none"
+          >
+            Rekomendasi Buku
+          </h3>
+
+          <p>Because Bedul liked...</p>
+        </header>
+
+        <div
+          class="relative grid w-full grid-cols-2 gap-x-4 gap-y-6 xl:grid-cols-4 xl:gap-16"
+        >
+          <svg
+            class="absolute -bottom-20 -z-0 hidden h-auto w-full xl:block"
+            viewBox="0 0 817 279"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2.25 88.548C18.6561 87.0002 35.0363 79.3796 49.8038 72.5171C71.9385 62.2309 94.9469 53.1585 118.104 45.4397C160.246 31.3922 203.405 21.7266 247.294 15.2638C327.106 3.51128 405.288 2.46607 485.737 2.46607C562.456 2.46607 659.272 2.36093 730.039 34.5279C749.98 43.5917 769.268 54.4089 786.148 68.4757C798.389 78.6766 812.808 93.1981 814.505 110.169C816.466 129.786 781.471 131.197 769.308 131.926C689.676 136.694 614.124 136.049 534.368 130.04C514.218 128.522 452.316 110.169 415 144.5C391.5 166.12 387 208.5 408 276.5"
+              stroke="#242424"
+              stroke-opacity="0.8"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+
+          <svg
+            class="absolute -bottom-20 left-1/2 -z-0 block h-full w-auto -translate-x-1/2 xl:hidden"
+            viewBox="0 0 220 414"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 44.6908C40.7218 26.4563 66.0698 11.654 119.048 17.169C172.026 22.6841 232.841 101.848 201.369 180.064C169.897 258.279 43.3331 176.053 27.2587 231.204C11.1843 286.356 190.449 225.757 117.406 310.218C101.54 328.564 98.391 327.376 108.543 372.5"
+              stroke="#242424"
+              stroke-opacity="0.8"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+
+          <figure class="relative h-64 w-full shadow-2xl xl:h-96">
+            <img
+              class="h-full w-full object-cover"
+              src="/book-photo-1.png"
+              alt="Book 1"
+            />
+          </figure>
+
+          <figure class="relative h-64 w-full shadow-2xl xl:h-96">
+            <img
+              class="h-full w-full object-cover"
+              src="/book-photo-2.png"
+              alt="Book 2"
+            />
+          </figure>
+
+          <figure class="relative h-64 w-full shadow-2xl xl:h-96">
+            <img
+              class="h-full w-full object-cover"
+              src="/book-photo-3.png"
+              alt="Book 3"
+            />
+          </figure>
+
+          <figure class="relative h-64 w-full shadow-2xl xl:h-96">
+            <img
+              class="h-full w-full object-cover"
+              src="/book-photo-4.png"
+              alt="Book 4"
+            />
+          </figure>
+        </div>
+
+        <div class="relative flex w-full flex-col items-center pt-4">
+          <svg
+            class="h-24 w-24"
+            viewBox="0 0 102 102"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_14_34)">
+              <path
+                d="M47.449 100.965C48.1387 102.345 50.3802 102.345 51.0699 100.965C56.9322 90.2754 62.2772 79.4128 65.3808 67.6882C65.7257 65.964 63.829 64.2398 62.2772 65.2743C58.8288 67.6882 55.8977 70.6194 53.3114 74.0678C54.001 49.9289 57.277 24.9278 51.5871 1.13372C51.2423 -0.590493 48.3114 -0.24566 48.4838 1.47883C51.5871 26.135 49.1732 50.6188 48.8287 75.275C45.8975 72.6887 42.9664 70.1024 40.2076 67.5161C39.0007 66.3091 36.4141 66.9988 36.5865 69.0679C37.9662 80.4474 41.7594 91.1375 47.449 100.965ZM49.3457 80.4474C50.3802 81.9992 53.3114 81.6543 53.3114 79.2404C53.3114 79.068 53.3114 78.8956 53.3114 78.8956C55.3804 76.8265 57.277 74.7575 59.5185 72.6884C56.7598 80.6198 53.3113 88.0339 49.3459 95.448C45.8975 88.7236 43.3112 81.8267 41.9318 74.4126C43.8285 76.1368 45.8975 77.8611 47.7944 79.7577C48.1387 80.4474 48.8287 80.6198 49.3457 80.4474Z"
+                fill="#242424"></path>
+            </g>
+            <defs>
+              <clipPath id="clip0_14_34">
+                <rect
+                  width="102"
+                  height="102"
+                  fill="white"
+                  transform="translate(102 102) rotate(-180)"></rect>
+              </clipPath>
+            </defs>
+          </svg>
+
+          <h5 class="my-4 text-center text-lg font-semibold leading-[22px]">
+            He Discovered:
+          </h5>
+
+          <figure
+            class="mb-10 flex items-center justify-center gap-2 xl:gap-10"
+          >
+            <div class="mt-16 max-w-[180px] space-y-1.5 self-start text-right">
+              <h5 class="text-lg font-semibold leading-6">
+                I Used To Be A Miserable F*ck
+              </h5>
+              <p class="text-base font-normal leading-6">JOHN KIM~</p>
+            </div>
+
+            <img
+              class="h-64 w-auto shadow-2xl 2xl:h-96"
+              src="/book-photo-5.png"
+              alt="Book 8"
+            />
+
+            <div class="mb-16 max-w-[180px] self-end">
+              <h5 class="text-lg font-semibold leading-6">
+                Steam Punk, Science, Fiction, Fantasy
+              </h5>
+            </div>
+          </figure>
+
+          <button
+            id="book-recommendation"
+            type="button"
+            class="flex w-60 items-center justify-center rounded-full bg-[#128C55] px-6 py-4 font-bold text-white transition-all duration-300 ease-out hover:bg-[#128C55]/90"
+          >
+            Coba Rekomendasi Buku
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="CATEGORIES relative w-full py-24">
+      <div class="container mx-auto max-w-screen-xl space-y-9 px-4 xl:px-12">
+        <h3
+          class="mb-9 text-center font-arvo text-2xl leading-7 xl:text-left xl:text-[34px] xl:leading-none"
+        >
+          Kategori Buku
+        </h3>
+
+        <div
+          class="flex flex-wrap items-start justify-between gap-8 xl:items-center"
+        >
+          <img
+            class="h-64 w-full xl:w-auto"
+            src="/category-ill-1.jpg"
+            alt="Category illustration"
+          />
+
+          <nav class="flex flex-col items-start gap-3">
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Art">Art</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Biography"
+            >
+              Biography
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Business"
+            >
+              Business
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Childrens"
+            >
+              Children’s
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Christian"
+            >
+              Christian
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Classics"
+            >
+              Classics
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Comics"
+            >
+              Comics</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Cookbooks
+            "
+            >
+              Cookbooks
+            </a>
+          </nav>
+
+          <nav class="flex flex-col items-start gap-3">
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Ebooks">Ebooks</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Mystery"
+            >
+              Mystery</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Nonfiction"
+            >
+              Nonfiction
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Poetry"
+            >
+              Poetry</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Psychology"
+            >
+              Psychology
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Romance"
+            >
+              Romance</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Science"
+            >
+              Science</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Science Fiction
+            "
+            >
+              Science Fiction
+            </a>
+          </nav>
+
+          <nav class="flex flex-col items-start gap-3">
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Music">Music</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Fantasy"
+            >
+              Fantasy</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Fiction"
+            >
+              Fiction</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Graphic Novels"
+            >
+              Graphic Novels
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Historical Fiction"
+            >
+              Historical Fiction
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/History"
+            >
+              History</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Horror"
+            >
+              Horror</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Memoir
+            "
+            >
+              Memoir
+            </a>
+          </nav>
+
+          <nav class="flex flex-col items-start gap-3">
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Self Help">Self Help</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Sports"
+            >
+              Sports</a
+            >
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Thriller"
+            >
+              Thriller
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Graphic Novels"
+            >
+              Travel
+            </a>
+            <a
+              class="text-sm leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/Young Adult"
+            >
+              Young Adult
+            </a>
+            <a
+              class="text-sm font-semibold leading-5 text-[#128C55] hover:underline xl:text-base"
+              href="/More Categories"
+            >
+              More Categories
+            </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="QUOTES relative w-full bg-[#F9F8F6] py-6 xl:py-24">
+      <div class="container mx-auto max-w-screen-xl px-4 xl:px-12">
+        <div class="flex w-full flex-1 justify-start">
+          <svg
+            class="h-14 w-auto xl:h-20"
+            viewBox="0 0 80 72"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.14"
+              d="M18 72C12.8 72 8.46667 69.8682 5 65.6046C1.66667 61.2034 0 55.0831 0 47.2436C0 36.9284 2.53333 27.7135 7.6 19.5989C12.6667 11.3467 19.7333 4.81376 28.8 0L34.2 9.90259C28.0667 13.6161 23.2 18.2235 19.6 23.7249C16 29.0888 14 35.3467 13.6 42.4986C15.2 41.6734 16.9333 41.2607 18.8 41.2607C22.9333 41.2607 26.2667 42.6361 28.8 45.3868C31.4667 48.1375 32.8 51.7135 32.8 56.1146C32.8 60.9284 31.4 64.7794 28.6 67.6676C25.8 70.5559 22.2667 72 18 72ZM63.8 72C58.6 72 54.2667 69.8682 50.8 65.6046C47.4667 61.2034 45.8 55.0831 45.8 47.2436C45.8 36.9284 48.3333 27.7135 53.4 19.5989C58.4667 11.3467 65.5333 4.81376 74.6 0L80 9.90259C73.8667 13.6161 69 18.2235 65.4 23.7249C61.8 29.0888 59.8 35.3467 59.4 42.4986C61 41.6734 62.7333 41.2607 64.6 41.2607C68.7333 41.2607 72.0667 42.6361 74.6 45.3868C77.2667 48.1375 78.6 51.7135 78.6 56.1146C78.6 60.9284 77.2 64.7794 74.4 67.6676C71.6 70.5559 68.0667 72 63.8 72Z"
+              fill="#2E2E2E"></path>
+          </svg>
+        </div>
+
+        <div
+          class="container mx-auto flex max-w-4xl flex-col items-center py-6 text-center"
+        >
+          <h3
+            class="mb-6 font-arvo text-xl font-bold italic leading-8 text-[#2e2e2e] xl:mb-9 xl:text-[34px] xl:leading-[40px]"
+          >
+            “The person, be it gentleman or lady, who has not pleasure in a good
+            novel, must be intolerably stupid.”
+          </h3>
+
+          <p class="mb-6 font-arvo text-base font-medium xl:mb-14 xl:text-2xl">
+            ~Jane Austen, Northanger Abbey~
+          </p>
+
+          <a
+            href="/"
+            class="flex w-60 items-center justify-center rounded-full bg-[#128C55] px-6 py-3 font-bold text-white transition-all duration-300 ease-out hover:bg-[#128C55]/90 xl:py-4"
+          >
+            Share
+          </a>
+        </div>
+
+        <div class="flex w-full flex-1 justify-end">
+          <svg
+            class="h-14 w-auto xl:h-20"
+            viewBox="0 0 80 72"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.14"
+              d="M18 72C12.8 72 8.46667 69.8682 5 65.6046C1.66667 61.2034 0 55.0831 0 47.2436C0 36.9284 2.53333 27.7135 7.6 19.5989C12.6667 11.3467 19.7333 4.81376 28.8 0L34.2 9.90259C28.0667 13.6161 23.2 18.2235 19.6 23.7249C16 29.0888 14 35.3467 13.6 42.4986C15.2 41.6734 16.9333 41.2607 18.8 41.2607C22.9333 41.2607 26.2667 42.6361 28.8 45.3868C31.4667 48.1375 32.8 51.7135 32.8 56.1146C32.8 60.9284 31.4 64.7794 28.6 67.6676C25.8 70.5559 22.2667 72 18 72ZM63.8 72C58.6 72 54.2667 69.8682 50.8 65.6046C47.4667 61.2034 45.8 55.0831 45.8 47.2436C45.8 36.9284 48.3333 27.7135 53.4 19.5989C58.4667 11.3467 65.5333 4.81376 74.6 0L80 9.90259C73.8667 13.6161 69 18.2235 65.4 23.7249C61.8 29.0888 59.8 35.3467 59.4 42.4986C61 41.6734 62.7333 41.2607 64.6 41.2607C68.7333 41.2607 72.0667 42.6361 74.6 45.3868C77.2667 48.1375 78.6 51.7135 78.6 56.1146C78.6 60.9284 77.2 64.7794 74.4 67.6676C71.6 70.5559 68.0667 72 63.8 72Z"
+              fill="#2E2E2E"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative w-full py-6 xl:py-24">
+      <div
+        class="container mx-auto max-w-screen-xl space-y-6 px-4 xl:space-y-20 xl:px-12"
+      >
+        <h3
+          class="text-center font-arvo text-2xl leading-7 xl:text-left xl:text-[34px] xl:leading-none"
+        >
+          Blog Post
+        </h3>
+
+        <div class="grid grid-cols-2 gap-5 xl:grid-cols-3">
+          {
+            [1, 2, 3].map((item) => {
+              return (
+                <figure class="relative w-full overflow-hidden rounded-lg border border-[#DCDCDC] bg-white shadow-none transition-all duration-300 ease-out hover:shadow-md">
+                  <a class="absolute z-10 h-full w-full" href="/blog-detail">
+                    {" "}
+                  </a>
+
+                  <img
+                    class="aspect-video h-auto w-full"
+                    src="/blog-1.png"
+                    alt="Blog 1"
+                  />
+
+                  <div class="w-full px-2 pb-3.5 pt-1.5 xl:p-5">
+                    <h5 class="mb-1 text-sm font-bold leading-5 text-[#2e2e2e] xl:mb-5 xl:text-xl xl:leading-[26px]">
+                      A conversation with Marjan Kamali
+                    </h5>
+
+                    <p class="mb-1.5 line-clamp-2 text-sm leading-5 text-[#515151] xl:mb-8 xl:text-base">
+                      In her second novel, The Stationery Shop, Marjan Kamali
+                      weaves a heartbreaking tale
+                    </p>
+
+                    <p class="text-sm leading-5 text-[#2e2e2e] xl:text-base">
+                      <span>Reza Adil</span> - <span>25 Januari 2021</span>
+                    </p>
+                  </div>
+                </figure>
+              );
+            })
+          }
+        </div>
+
+        <div class="flex w-full justify-center">
+          <a
+            href="/"
+            class="flex w-60 items-center justify-center rounded-full bg-[#128C55] px-6 py-3 font-bold text-white transition-all duration-300 ease-out hover:bg-[#128C55]/90 xl:py-4"
+          >
+            Semua Blog
+          </a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div
+        class="modal__container rounded-none xl:rounded-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-1-title"
+      >
+        <header
+          class="mb-6 mt-11 flex items-center justify-between px-4 xl:justify-center"
+        >
+          <h2
+            class="text-center font-arvo text-xl leading-none xl:text-[34px]"
+            id="modal-1-title"
+          >
+            Pilih rekomendasi
+          </h2>
+
+          <button id="close-modal" type="button" class="block xl:hidden">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M19.6649 18.0492C20.1117 18.496 20.1117 19.2183 19.6649 19.6651C19.442 19.888 19.1495 20 18.8569 20C18.5643 20 18.2718 19.888 18.0489 19.6651L12 13.6161L5.95107 19.6651C5.72822 19.888 5.43566 20 5.1431 20C4.85054 20 4.55798 19.888 4.33513 19.6651C3.88829 19.2183 3.88829 18.496 4.33513 18.0492L10.3841 12.0001L4.33513 5.95111C3.88829 5.50426 3.88829 4.78199 4.33513 4.33514C4.78197 3.88829 5.50423 3.88829 5.95107 4.33514L12 10.3842L18.0489 4.33514C18.4958 3.88829 19.218 3.88829 19.6649 4.33514C20.1117 4.78199 20.1117 5.50426 19.6649 5.95111L13.6159 12.0001L19.6649 18.0492Z"
+                fill="#2E2E2E"></path>
+            </svg>
+          </button>
+        </header>
+
+        <main
+          class="modal__content px-4 !font-source-sans xl:px-8"
+          id="modal-1-content"
+        >
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <ul class="flex w-full flex-row flex-wrap gap-3">
+              {
+                listItem.map((item) => {
+                  return (
+                    <li>
+                      <input
+                        type="checkbox"
+                        id={item}
+                        value={item}
+                        class="peer hidden"
+                        required=""
+                      />
+                      <label
+                        for={item}
+                        class="inline-flex w-full cursor-pointer items-center justify-between gap-3 rounded-full border border-[#EBEBEB] bg-white p-3 text-gray-500 hover:bg-gray-50 hover:text-gray-600 peer-checked:border-[#128C55] peer-checked:bg-[#128C55]/10 peer-checked:text-gray-600 xl:p-4"
+                      >
+                        <div class="w-full text-sm font-semibold xl:text-lg">
+                          {item}
+                        </div>
+                        <svg
+                          class="flex-shrink-0"
+                          width="16"
+                          height="20"
+                          viewBox="0 0 16 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M8 2C3.58853 2 0 5.58853 0 10C0 14.4115 3.58853 18 8 18C12.4115 18 16 14.4108 16 10C16 5.58916 12.4115 2 8 2ZM8 16.7607C4.27266 16.7607 1.23934 13.728 1.23934 10C1.23934 6.27203 4.27266 3.23934 8 3.23934C11.7273 3.23934 14.7607 6.27203 14.7607 10C14.7607 13.728 11.728 16.7607 8 16.7607Z"
+                            fill="#515151"
+                          />
+                          <path
+                            d="M11.0987 9.32457H8.61998V6.84588C8.61998 6.50382 8.34298 6.2262 8.00029 6.2262C7.6576 6.2262 7.3806 6.50382 7.3806 6.84588V9.32457H4.90191C4.55923 9.32457 4.28223 9.6022 4.28223 9.94426C4.28223 10.2863 4.55923 10.5639 4.90191 10.5639H7.3806V13.0426C7.3806 13.3847 7.6576 13.6623 8.00029 13.6623C8.34298 13.6623 8.61998 13.3847 8.61998 13.0426V10.5639H11.0987C11.4414 10.5639 11.7184 10.2863 11.7184 9.94426C11.7184 9.6022 11.4414 9.32457 11.0987 9.32457Z"
+                            fill="#515151"
+                          />
+                        </svg>
+                      </label>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          </div>
+        </main>
+
+        <footer
+          class="flex items-center justify-between bg-[#F9F8F6] p-4 xl:px-8 xl:py-12"
+        >
+          <button class="text-2xl font-bold leading-7">0/5</button>
+          <button
+            class="rounded-full bg-[#128C55] px-6 py-4 font-source-sans text-base font-semibold leading-none tracking-widest text-white"
+            data-micromodal-close
+            aria-label="Close this dialog window">Selesai</button
+          >
+        </footer>
+      </div>
+    </div>
+  </div> -->
+
+  <div
+    id="modal-choose-book-index"
+    class="fixed inset-0 z-[999999999] hidden h-full w-full items-center justify-center"
+  >
+    <!-- overlay -->
+    <div
+      id="overlay-index"
+      class="fixed inset-0 z-10 h-full w-full bg-black/50"
+    >
+    </div>
+
+    <!-- content -->
+    <div
+      id="choose-book-section"
+      class="relative z-20 hidden h-screen w-full max-w-4xl overflow-hidden bg-white p-0 lg:h-full lg:max-h-[576px] lg:rounded-2xl lg:p-11"
+    >
+      <!-- if 404 use mb-6 otherwise mb-14 -->
+      <header class="mb-2 flex flex-col items-center lg:mb-6">
+        <nav
+          class="mb-2 flex w-full items-center justify-between border-b border-[#EBEBEB] p-4 lg:justify-center lg:border-b-0 lg:p-0"
+        >
+          <h1
+            class="w-auto text-left font-arvo text-xl leading-none text-[#2e2e2e] lg:w-full lg:text-center lg:text-[34px]"
+          >
+            Pilih Buku
+          </h1>
+
+          <button id="close-modal-index-book" class="block lg:hidden">
+            <svg
+              class="h-6 w-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M19.6646 18.0489C20.1115 18.4958 20.1115 19.2181 19.6646 19.6649C19.4418 19.8878 19.1492 19.9998 18.8567 19.9998C18.5641 19.9998 18.2715 19.8878 18.0487 19.6649L11.9998 13.6159L5.95083 19.6649C5.72798 19.8878 5.43542 19.9998 5.14286 19.9998C4.8503 19.9998 4.55774 19.8878 4.33489 19.6649C3.88805 19.2181 3.88805 18.4958 4.33489 18.0489L10.3838 11.9999L4.33489 5.95086C3.88805 5.50401 3.88805 4.78174 4.33489 4.33489C4.78173 3.88804 5.50399 3.88804 5.95083 4.33489L11.9998 10.3839L18.0487 4.33489C18.4955 3.88804 19.2178 3.88804 19.6646 4.33489C20.1115 4.78174 20.1115 5.50401 19.6646 5.95086L13.6157 11.9999L19.6646 18.0489Z"
+                fill="#2E2E2E"></path>
+            </svg>
+          </button>
+        </nav>
+
+        <p class="mb-5 text-base font-normal leading-6 text-[#636363]">
+          Kami menampilkan sesuai kategori yang kamu pilih.
+        </p>
+
+        <!-- search -->
+        <div class="flex w-full items-center justify-center gap-4 px-4 lg:px-0">
+          <div class="relative w-full lg:max-w-sm">
+            <svg
+              class="absolute left-4 top-1/2 z-10 h-6 w-6 -translate-y-1/2 lg:left-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M5 10C5 6.691 7.691 4 11 4C14.309 4 17 6.691 17 10C17 13.309 14.309 16 11 16C7.691 16 5 13.309 5 10ZM21.707 19.293L17.312 14.897C18.366 13.542 19 11.846 19 10C19 5.589 15.411 2 11 2C6.589 2 3 5.589 3 10C3 14.411 6.589 18 11 18C12.846 18 14.542 17.366 15.897 16.312L20.293 20.707C20.488 20.902 20.744 21 21 21C21.256 21 21.512 20.902 21.707 20.707C22.098 20.316 22.098 19.684 21.707 19.293Z"
+                fill="#8D8D8D"></path>
+            </svg>
+
+            <input
+              type="text"
+              class="w-full rounded-full border border-[#dedede] py-2 pl-12 lg:pl-16"
+              placeholder="Cari judul buku sesuai kategori..."
+            />
+          </div>
+
+          <button class="block flex-shrink-0 text-sm lg:hidden">Cari</button>
+        </div>
+      </header>
+
+      <!-- search found / initial list -->
+      <section
+        class="block h-[calc(100vh_-_288px)] overflow-y-auto p-4 lg:h-auto lg:p-0"
+      >
+        <div
+          class="grid w-full grid-cols-3 place-items-center justify-center gap-4 lg:grid-cols-7 lg:gap-6"
+        >
+          {
+            [1, 2, 3, 4, 5, 6, 7].map((item) => {
+              return (
+                <div>
+                  <input
+                    type="checkbox"
+                    id={`checkbox item-${item}`}
+                    value={`item-${item}`}
+                    class="checkbox peer hidden"
+                  />
+
+                  <label
+                    for={`checkbox item-${item}`}
+                    class="w-full cursor-pointer font-normal peer-checked:font-semibold [&>img]:shadow-sm peer-checked:[&>img]:shadow-2xl"
+                  >
+                    <figure class="relative space-y-3">
+                      <img
+                        class="h-auto w-full"
+                        src="/choose-book-1.png"
+                        alt="Choose Book 1"
+                      />
+
+                      <h5 class="pointer-events-none text-sm leading-5">
+                        The Subtle Art of Not Giving A
+                      </h5>
+                    </figure>
+                  </label>
+                </div>
+              );
+            })
+          }
+        </div>
+      </section>
+
+      <div
+        class="absolute bottom-0 left-0 z-10 flex h-28 w-full flex-col items-start gap-2 border-t bg-[#FCFAF7] p-4 shadow-xl lg:flex-row lg:items-center lg:justify-between lg:border-0 lg:px-14 lg:py-8 lg:shadow-none"
+      >
+        <div class="print-values">
+          <h5
+            id="valueList"
+            class="text-base font-bold leading-5 text-[#141414]"
+          >
+            0 Buku dipilih
+          </h5>
+        </div>
+
+        <div class="flex w-full flex-row gap-2 lg:w-auto lg:gap-4">
+          <button
+            id="btn-prev-choose-book"
+            class="w-full rounded-full border border-[#222222] bg-white px-6 py-3 text-base font-bold leading-5 text-[#222222] lg:w-auto lg:py-4"
+          >
+            Sebelumnya
+          </button>
+
+          <button
+            id="next-btn"
+            class="w-full cursor-pointer rounded-full bg-[#72D1A6] px-6 py-3 text-base font-bold leading-5 text-white disabled:cursor-auto lg:w-auto lg:py-4"
+          >
+            Selanjutnya
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      id="recommend-book-section"
+      class="relative z-20 h-screen w-full max-w-4xl overflow-hidden bg-white p-0 lg:h-full lg:max-h-[576px] lg:rounded-2xl lg:p-11"
+    >
+      <header
+        class="mb-5 mt-5 flex items-center justify-between px-4 xl:justify-center"
+      >
+        <h2
+          class="text-center font-arvo text-xl leading-none xl:text-[34px]"
+          id="modal-1-title"
+        >
+          Pilih rekomendasi
+        </h2>
+
+        <button id="close-modal-index" type="button" class="block xl:hidden">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M19.6649 18.0492C20.1117 18.496 20.1117 19.2183 19.6649 19.6651C19.442 19.888 19.1495 20 18.8569 20C18.5643 20 18.2718 19.888 18.0489 19.6651L12 13.6161L5.95107 19.6651C5.72822 19.888 5.43566 20 5.1431 20C4.85054 20 4.55798 19.888 4.33513 19.6651C3.88829 19.2183 3.88829 18.496 4.33513 18.0492L10.3841 12.0001L4.33513 5.95111C3.88829 5.50426 3.88829 4.78199 4.33513 4.33514C4.78197 3.88829 5.50423 3.88829 5.95107 4.33514L12 10.3842L18.0489 4.33514C18.4958 3.88829 19.218 3.88829 19.6649 4.33514C20.1117 4.78199 20.1117 5.50426 19.6649 5.95111L13.6159 12.0001L19.6649 18.0492Z"
+              fill="#2E2E2E"></path>
+          </svg>
+        </button>
+      </header>
+      <section
+        class="block h-[calc(100vh_-_200px)] overflow-y-auto p-4 lg:h-[340px] lg:p-0"
+      >
+        <!-- <main class="=px-4 overflow-auto !font-source-sans xl:px-8"> -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <ul class="flex w-full flex-row flex-wrap gap-3">
+            {
+              listItem.map((item) => {
+                return (
+                  <li>
+                    <input
+                      type="checkbox"
+                      id={item}
+                      value={item}
+                      class="peer hidden"
+                      required=""
+                    />
+                    <label
+                      for={item}
+                      class="inline-flex w-full cursor-pointer items-center justify-between gap-3 rounded-full border border-[#EBEBEB] bg-white p-3 text-gray-500 hover:bg-gray-50 hover:text-gray-600 peer-checked:border-[#128C55] peer-checked:bg-[#128C55]/10 peer-checked:text-gray-600 xl:p-4"
+                    >
+                      <div class="w-full text-sm font-semibold xl:text-lg">
+                        {item}
+                      </div>
+                      <svg
+                        class="flex-shrink-0"
+                        width="16"
+                        height="20"
+                        viewBox="0 0 16 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 2C3.58853 2 0 5.58853 0 10C0 14.4115 3.58853 18 8 18C12.4115 18 16 14.4108 16 10C16 5.58916 12.4115 2 8 2ZM8 16.7607C4.27266 16.7607 1.23934 13.728 1.23934 10C1.23934 6.27203 4.27266 3.23934 8 3.23934C11.7273 3.23934 14.7607 6.27203 14.7607 10C14.7607 13.728 11.728 16.7607 8 16.7607Z"
+                          fill="#515151"
+                        />
+                        <path
+                          d="M11.0987 9.32457H8.61998V6.84588C8.61998 6.50382 8.34298 6.2262 8.00029 6.2262C7.6576 6.2262 7.3806 6.50382 7.3806 6.84588V9.32457H4.90191C4.55923 9.32457 4.28223 9.6022 4.28223 9.94426C4.28223 10.2863 4.55923 10.5639 4.90191 10.5639H7.3806V13.0426C7.3806 13.3847 7.6576 13.6623 8.00029 13.6623C8.34298 13.6623 8.61998 13.3847 8.61998 13.0426V10.5639H11.0987C11.4414 10.5639 11.7184 10.2863 11.7184 9.94426C11.7184 9.6022 11.4414 9.32457 11.0987 9.32457Z"
+                          fill="#515151"
+                        />
+                      </svg>
+                    </label>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+        <!-- </main> -->
+      </section>
+
+      <div
+        class="absolute bottom-0 left-0 z-10 flex h-28 w-full flex-col items-start gap-2 border-t bg-[#FCFAF7] p-4 shadow-xl lg:flex-row lg:items-center lg:justify-between lg:border-0 lg:px-14 lg:py-8 lg:shadow-none"
+      >
+        <div class="print-values">
+          <h5
+            id="valueList"
+            class="text-base font-bold leading-5 text-[#141414]"
+          >
+            0/5
+          </h5>
+        </div>
+
+        <div class="flex w-full flex-row lg:w-auto lg:gap-4">
+          <button
+            id="btn-recommend-finish"
+            class="w-full rounded-full bg-[#128C55] px-6 py-4 font-source-sans text-base font-semibold leading-none tracking-widest text-white lg:w-full lg:py-4"
+            aria-label="Close this dialog window">Selesai</button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  #overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(249, 248, 246, 0) 0%,
+      #f9f8f6 100%
+    );
+  }
+
+  .modal {
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+      helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial,
+      sans-serif;
+  }
+
+  .modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .modal__container {
+    background-color: #fff;
+    max-width: 910px;
+    max-height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+
+  .modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 44px;
+  }
+
+  .modal__title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    color: #00449e;
+    box-sizing: border-box;
+  }
+
+  .modal__close {
+    background: transparent;
+    border: 0;
+  }
+
+  .modal__header .modal__close:before {
+    content: "\2715";
+  }
+
+  .modal__content {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .modal__btn {
+    font-size: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: #e6e6e6;
+    color: rgba(0, 0, 0, 0.8);
+    border-radius: 0.25rem;
+    border-style: none;
+    border-width: 0;
+    cursor: pointer;
+    -webkit-appearance: button;
+    text-transform: none;
+    overflow: visible;
+    line-height: 1.15;
+    margin: 0;
+    will-change: transform;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: -webkit-transform 0.25s ease-out;
+    transition: transform 0.25s ease-out;
+    transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+  }
+
+  .modal__btn:focus,
+  .modal__btn:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+
+  .modal__btn-primary {
+    background-color: #00449e;
+    color: #fff;
+  }
+
+  /**************************\
+Demo Animation Style
+\**************************/
+  @keyframes mmfadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes mmfadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes mmslideIn {
+    from {
+      transform: translateY(15%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes mmslideOut {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-10%);
+    }
+  }
+
+  .micromodal-slide {
+    display: none;
+  }
+
+  .micromodal-slide.is-open {
+    display: block;
+  }
+
+  .micromodal-slide[aria-hidden="false"] .modal__overlay {
+    animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .micromodal-slide[aria-hidden="false"] .modal__container {
+    animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .micromodal-slide[aria-hidden="true"] .modal__overlay {
+    animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .micromodal-slide[aria-hidden="true"] .modal__container {
+    animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .micromodal-slide .modal__container,
+  .micromodal-slide .modal__overlay {
+    will-change: transform;
+  }
+</style>

@@ -1,0 +1,293 @@
+---
+import Layout from "../layouts/Layout.astro";
+const listBook = [
+  {
+    id: 1,
+    src: "/rekomendasi-1.png",
+    title: "1 Jam Ahli Pemrograman : HTML, CSS, Dan Javascript",
+    author: "Adam Saputra",
+  },
+  {
+    id: 2,
+    src: "/rekomendasi-2.png",
+    title: "The Intelligent Investor",
+    author: "+++",
+  },
+  {
+    id: 3,
+    src: "/rekomendasi-3.png",
+    title: "Atomic Habits",
+    author: "James Clear",
+  },
+  {
+    id: 4,
+    src: "/rekomendasi-4.png",
+    title: "Outliers",
+    author: "Malcolm Gladwell",
+  },
+  {
+    id: 5,
+    src: "/rekomendasi-5.png",
+    title: "Mark Manson: Everything Is F*Cked",
+    author: "Mark Manson",
+  },
+  {
+    id: 6,
+    src: "/rekomendasi-6.png",
+    title: "Atomic Habits",
+    author: "James Clear",
+  },
+];
+
+const popularList = [
+  {
+    id: 1,
+    title: "Outliers",
+    author: "Malcolm Gladwell",
+  },
+  {
+    id: 2,
+    title: "Everything Is F*cked",
+    author: "Mark Manson",
+  },
+  {
+    id: 3,
+    title: "12 Rules For Life: An Antidote To Chaos",
+    author: "Jordan B. Peterson",
+  },
+  {
+    id: 4,
+    title: "Desain Grafis dengan Canva untuk Pemula",
+    author: "Jubilee Enterprise",
+  },
+];
+---
+
+<script>
+  let modal_signup = document.querySelector("#modal-signup");
+  let close_icon = document.querySelector("#close-icon");
+
+  close_icon.addEventListener("click", () => {
+    modal_signup.classList.add("hidden");
+  });
+</script>
+
+<Layout title="Recommendation Book">
+  <!-- Modal Signup -->
+  <div
+    id="modal-signup"
+    class="fixed inset-0 z-[99999999] flex h-full w-full items-center justify-center"
+  >
+    <div class="absolute inset-0 z-0 h-full w-full bg-black/50"></div>
+
+    <div
+      class="relative z-10 -mt-0 min-h-screen w-full max-w-4xl px-0 lg:-mt-12 lg:min-h-max lg:px-8"
+    >
+      <nav
+        class="flex items-center justify-between border-b border-[#EBEBEB] bg-white p-4 pt-4 lg:justify-center lg:rounded-t-2xl lg:border-b-0 lg:pt-11"
+      >
+        <h1
+          class="text-left font-arvo text-xl font-normal lg:text-center lg:text-4xl"
+        >
+          Rekomendasi Buku Untukmu
+        </h1>
+
+        <button id="close-icon" class="block lg:hidden">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M19.6649 18.0492C20.1117 18.496 20.1117 19.2183 19.6649 19.6651C19.442 19.888 19.1495 20 18.8569 20C18.5643 20 18.2718 19.888 18.0489 19.6651L12 13.6161L5.95107 19.6651C5.72822 19.888 5.43566 20 5.1431 20C4.85054 20 4.55798 19.888 4.33513 19.6651C3.88829 19.2183 3.88829 18.496 4.33513 18.0492L10.3841 12.0001L4.33513 5.95111C3.88829 5.50426 3.88829 4.78199 4.33513 4.33514C4.78197 3.88829 5.50423 3.88829 5.95107 4.33514L12 10.3842L18.0489 4.33514C18.4958 3.88829 19.218 3.88829 19.6649 4.33514C20.1117 4.78199 20.1117 5.50426 19.6649 5.95111L13.6159 12.0001L19.6649 18.0492Z"
+              fill="#2E2E2E"></path>
+          </svg>
+        </button>
+      </nav>
+
+      <h3 class="bg-white py-4 text-center text-sm leading-5 lg:py-0">
+        Kami telah memilih rekomendasi yang cocok buat kamu
+      </h3>
+
+      <div
+        class="relative z-10 h-[calc(100vh_-_113px)] bg-white/90 px-6 pt-20 before:absolute before:inset-0 before:h-full before:w-full before:bg-white/40 before:blur-sm lg:h-auto lg:rounded-b-2xl lg:pb-14 lg:pt-11"
+      >
+        <div class="relative z-10 flex h-full flex-col items-center">
+          <h5 class="mb-6 text-center text-base font-bold">
+            Daftar sekarang untuk melihat rekomendasi.
+          </h5>
+
+          <div class="flex w-full max-w-sm flex-col items-start gap-4">
+            <button
+              class="relative flex w-full items-center justify-center gap-3 rounded-full border-2 border-black bg-white py-4"
+            >
+              <img class="h-6 w-6" src="/icon-google.png" alt="Icon Google" />
+
+              <p class="text-base font-semibold leading-5">
+                Sign up with Google
+              </p>
+            </button>
+
+            <button
+              class="relative flex w-full items-center justify-center gap-3 rounded-full border-2 border-black bg-white py-4"
+            >
+              <img
+                class="h-6 w-6"
+                src="/icon-facebook.png"
+                alt="Icon facebook"
+              />
+
+              <p class="text-base font-semibold leading-5">
+                Sign up with Facebook
+              </p>
+            </button>
+
+            <button
+              class="relative flex w-full items-center justify-center gap-3 rounded-full border-2 border-black bg-white py-4"
+            >
+              <img class="h-6 w-6" src="/icon-x.png" alt="Icon x" />
+
+              <p class="text-base font-semibold leading-5">Sign up with X</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="container relative z-10 mx-auto grid h-full min-h-screen max-w-screen-xl grid-cols-1 px-4 lg:grid-cols-12 lg:gap-10 xl:px-12"
+  >
+    <section class="col-span-1 mt-20 min-h-screen lg:col-span-9 lg:mt-28">
+      <h1 class="mb-4 font-arvo text-2xl leading-7 lg:text-3xl">Rekomendasi</h1>
+
+      <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+        {
+          listBook.map((item) => {
+            return (
+              <figure class="space-y-2.5 lg:space-y-5">
+                <img
+                  src={item.src ?? `/rekomendasi-1.png`}
+                  alt="Rekomendasi 1"
+                />
+
+                <figcaption class="space-y-2">
+                  <a href="/" class="hover:underline">
+                    <h5 class="line-clamp-2 text-base font-semibold leading-[1.25] lg:text-lg lg:leading-[1.125]">
+                      {item.title ??
+                        "1 Jam Ahli Pemrograman : HTML, CSS, Dan Javascript"}
+                    </h5>
+                  </a>
+
+                  <a href="/" class="text-sm text-[#515151] hover:underline">
+                    by {item.author ?? "Adam Saputra"}
+                  </a>
+                </figcaption>
+              </figure>
+            );
+          })
+        }
+      </div>
+
+      <div class="my-8 hidden h-px w-full bg-[#dcdcdc] lg:block"></div>
+
+      <header class="mb-6 hidden items-center gap-3 lg:flex">
+        <h1 class="font-arvo text-2xl leading-7 lg:text-3xl">Giveaway</h1>
+
+        <button
+          class="-mb-1.5 rounded-[4px] bg-[#D6E4FE] px-3 py-1 text-xs font-semibold"
+        >
+          Beta
+        </button>
+      </header>
+
+      <div
+        class="mb-20 hidden grid-cols-2 gap-4 lg:grid lg:grid-cols-4 lg:gap-6"
+      >
+        {
+          listBook.map((item) => {
+            return (
+              <figure class="space-y-2.5 lg:space-y-5">
+                <img
+                  src={item.src ?? `/rekomendasi-1.png`}
+                  alt="Rekomendasi 1"
+                />
+
+                <figcaption class="space-y-2">
+                  <a href="/" class="hover:underline">
+                    <h5 class="line-clamp-2 text-base font-semibold leading-[1.25] lg:text-lg lg:leading-[1.125]">
+                      {item.title ??
+                        "1 Jam Ahli Pemrograman : HTML, CSS, Dan Javascript"}
+                    </h5>
+                  </a>
+
+                  <a href="/" class="text-sm text-[#515151] hover:underline">
+                    by {item.author ?? "Adam Saputra"}
+                  </a>
+                </figcaption>
+              </figure>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <div class="relative col-span-1 lg:sticky lg:top-32 lg:col-span-3 lg:mt-32">
+      <div class="my-8 block h-px w-full bg-[#dcdcdc] lg:hidden"></div>
+
+      <section class="relative mb-8">
+        <header class="mb-2 space-y-4">
+          <h3 class="font-arvo text-2xl leading-7 lg:text-3xl">Want to Read</h3>
+
+          <p class="text-sm font-semibold">
+            Tambahkan bacaan yang ingin anda baca dari rekomendasi buku.
+          </p>
+        </header>
+
+        <p class="text-sm text-[#515151]">
+          In her second novel, The Stationery Shop, Marjan Kamali weaves a
+          heartbreaking tale
+        </p>
+      </section>
+
+      <div class="my-8 block h-px w-full bg-[#dcdcdc] lg:hidden"></div>
+
+      <section class="relative mb-8">
+        <h3 class="mb-4 font-arvo text-2xl leading-7 lg:text-3xl">
+          Popular This Week
+        </h3>
+
+        <div class="mb-4 space-y-4">
+          {
+            popularList.map((item) => {
+              return (
+                <figure class="group relative space-y-2">
+                  <a class="absolute inset-0 z-10 h-full w-full" href="/" />
+                  <h5 class="text-sm font-semibold group-hover:underline">
+                    {item.title ?? "Outliers"}
+                  </h5>
+
+                  <p class="text-sm text-[#515151]">
+                    by {item.author ?? "Malcolm Gladwells"}
+                  </p>
+                </figure>
+              );
+            })
+          }
+        </div>
+
+        <button
+          id="search-book"
+          type="button"
+          class="relative flex items-center justify-center rounded-full bg-[#128C55] px-8 py-2 font-bold text-white transition-all duration-300 ease-out hover:bg-[#128C55]/90"
+        >
+          Cari Buku
+        </button>
+      </section>
+    </div>
+  </div>
+</Layout>
