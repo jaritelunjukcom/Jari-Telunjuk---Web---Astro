@@ -910,41 +910,43 @@ const listItem = [
 
       <!-- search found / initial list -->
       <section
-        class="block h-[calc(100vh_-_288px)] overflow-y-auto p-4 lg:h-auto lg:p-0"
+        class="block h-[calc(100vh_-_288px)] overflow-y-auto p-4 lg:h-[270px] lg:p-5"
       >
         <div
           class="grid w-full grid-cols-3 place-items-center justify-center gap-4 lg:grid-cols-7 lg:gap-6"
         >
           {
-            [1, 2, 3, 4, 5, 6, 7].map((item) => {
-              return (
-                <div>
-                  <input
-                    type="checkbox"
-                    id={`checkbox item-${item}`}
-                    value={`item-${item}`}
-                    class="checkbox peer hidden"
-                  />
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map(
+              (item) => {
+                return (
+                  <div>
+                    <input
+                      type="checkbox"
+                      id={`checkbox item-${item}`}
+                      value={`item-${item}`}
+                      class="checkbox peer hidden"
+                    />
 
-                  <label
-                    for={`checkbox item-${item}`}
-                    class="w-full cursor-pointer font-normal peer-checked:font-semibold [&>img]:shadow-sm peer-checked:[&>img]:shadow-2xl"
-                  >
-                    <figure class="relative space-y-3">
-                      <img
-                        class="h-auto w-full"
-                        src="/choose-book-1.png"
-                        alt="Choose Book 1"
-                      />
+                    <label
+                      for={`checkbox item-${item}`}
+                      class="w-full cursor-pointer font-normal peer-checked:font-semibold [&>img]:shadow-sm peer-checked:[&>img]:shadow-2xl"
+                    >
+                      <figure class="relative space-y-3">
+                        <img
+                          class="h-auto w-full"
+                          src="/choose-book-1.png"
+                          alt="Choose Book 1"
+                        />
 
-                      <h5 class="pointer-events-none text-sm leading-5">
-                        The Subtle Art of Not Giving A
-                      </h5>
-                    </figure>
-                  </label>
-                </div>
-              );
-            })
+                        <h5 class="pointer-events-none text-sm leading-5">
+                          The Subtle Art of Not Giving A
+                        </h5>
+                      </figure>
+                    </label>
+                  </div>
+                );
+              }
+            )
           }
         </div>
       </section>
